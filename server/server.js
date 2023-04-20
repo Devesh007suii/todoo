@@ -1,3 +1,8 @@
+import { app } from "./app.js";
+import { config } from "dotenv";
+import mongoose from "mongoose";
+import cloudinary from "cloudinary"
+
 require('@babel/register')({
   presets: [
     '@babel/preset-env',
@@ -5,13 +10,35 @@ require('@babel/register')({
   ]
 });
 
-import app from "./app.js";
-import mongoose from "mongoose";
+config({
+    path:"./config/config.env",
+})
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.log(err));
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET
+})
 
-const PORT = process.env.PORT || 4000;
+// Enable CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+// we should always connect database after connecting config
+mongoose.connect(process.env.MONGO_URI).then(()=>{console.log(`MongoDb connected`)})
+console.log(process.env.MONGO_URI)
+
+const port = process.env.PORT || 4000;
+
+app.set('port', port);
+
+app.get('/', (req, res) => {
+  res.send('Hello, world!');
+});
+
+const server = app.listen(port, () => {
+  console.log(`Server is running on PORT ${server.address().port}`);
+});
