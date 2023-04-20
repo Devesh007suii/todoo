@@ -3,7 +3,8 @@ import User from "./routers/User.js";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import cors from "cors";
-import path from "path";
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 // create express app
 const app = express();
@@ -20,13 +21,15 @@ app.use(
 );
 app.use(cors());
 
-// serve static files from frontend
-app.use(express.static(path.join(new URL('../my-app/build', import.meta.url).pathname)));
+// get directory name of the current module file
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
+// serve static files from frontend
+app.use(express.static(path.join(__dirname, "../my-app/build")));
 
 // serve frontend app on root route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../my-app/build", "App.js"));
+  res.sendFile(path.join(__dirname, "../my-app/build", "index.html"));
 });
 
 // set up API routes
