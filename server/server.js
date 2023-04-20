@@ -19,8 +19,7 @@ cloudinary.config({
 
 const app = express();
 
-// Serve the web-build directory as a static directory
-app.use(express.static(path.join(__dirname, 'web-build')));
+
 
 // Enable CORS
 app.use(function(req, res, next) {
