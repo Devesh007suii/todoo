@@ -21,11 +21,12 @@ app.use(
 app.use(cors());
 
 // serve static files from frontend
-app.use(express.static(path.join(__dirname, "../my-app/build")));
+app.use(express.static(path.join(new URL('../my-app/build', import.meta.url).pathname)));
+
 
 // serve frontend app on root route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../my-app/build", "index.html"));
+  res.sendFile(path.join(__dirname, "../my-app/build", "App.js"));
 });
 
 // set up API routes
