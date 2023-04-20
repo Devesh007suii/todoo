@@ -39,21 +39,7 @@ app.get('/', (req, res) => {
   res.send('Hello, world!');
 });
 
-app.get('/app', (req, res) => {
-  const html = `
-    <html>
-      <head>
-        <title>Your React Native App</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body>
-        <div id="root"></div>
-        <script src="./bundle.js"></script>
-      </body>
-    </html>
-  `;
-  res.send(html);
-});
+
 
 // Serve the bundled JavaScript file for the React Native app
 app.get('/bundle.js', (req, res) => {
