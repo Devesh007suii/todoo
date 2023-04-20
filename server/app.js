@@ -4,6 +4,7 @@ import { renderToString } from "react-dom/server";
 import Main from "../my-app/main";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import { createCompatibilityTransform } from '@babel/core';
 
 const app = express();
 
@@ -12,6 +13,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
+// set up API routes
+app.use("/api/v1", User);
+
 // serve your React Native app as the root route
 app.get("/", (req, res) => {
   const appHtml = renderToString(
@@ -19,6 +23,9 @@ app.get("/", (req, res) => {
       <Main />
     </Provider>
   );
+  const compatibilityTransform = createCompatibilityTransform({reactRuntime: 'automatic'});
+  const transformedHtml = compatibilityTransform.processSync(appHtml).code;
+
   res.send(`
     <!DOCTYPE html>
     <html>
@@ -28,13 +35,10 @@ app.get("/", (req, res) => {
         <title>React Native App</title>
       </head>
       <body>
-        <div id="app">${appHtml}</div>
+        <div id="app">${transformedHtml}</div>
       </body>
     </html>
   `);
 });
-
-// set up API routes
-app.use("/api/v1", User);
 
 export default app;
