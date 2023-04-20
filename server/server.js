@@ -2,6 +2,8 @@ import { app } from "./app.js";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary"
+import app from "./app.js";
+
 
 config({
     path:"./config/config.env",
