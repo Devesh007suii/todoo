@@ -23,7 +23,7 @@ const Stack = createNativeStackNavigator();
 
 
 
-const main = () => {
+const Main = () => {
 
   const dispatch = useDispatch()
 
@@ -54,4 +54,4 @@ const main = () => {
   )
 }
 
-export default main
+export default Main
