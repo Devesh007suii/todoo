@@ -31,8 +31,4 @@ app.get("/", (req, res) => {
 // set up API routes
 app.use("/api/v1", User);
 
-// start server
-const port = process.env.PORT || 4000;
-app.listen(port, () => {
-  console.log(`Server is running on PORT ${port}`);
-});
+export default app;
