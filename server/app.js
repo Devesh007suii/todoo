@@ -5,18 +5,22 @@ import store from "./redux/store";
 
 const app = express();
 
-app.use(express.json()); 
-app.use(express.urlencoded({ extended: false })); 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors());
 
 // serve your React Native app as the root route
 app.get("/", (req, res) => {
-  res.send(
+  const jsx = (
     <Provider store={store}>
       <Main />
     </Provider>
   );
+  const js = require("@babel/core").transformSync(jsx, {
+    presets: ["@babel/preset-react"]
+  }).code;
+  res.send(js);
 });
 
 // set up API routes
