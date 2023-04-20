@@ -1,4 +1,4 @@
-import { app } from "./app.js";
+import app from "./app.js";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary"
