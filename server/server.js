@@ -2,13 +2,15 @@ import app from "./app.js";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary"
-
-require('@babel/register')({
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-node'
-  ]
+import('@babel/register').then((babelRegister) => {
+  babelRegister.default({
+    presets: [
+      '@babel/preset-env',
+      '@babel/preset-node'
+    ]
+  });
 });
+
 
 config({
     path:"./config/config.env",
