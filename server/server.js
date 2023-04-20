@@ -2,9 +2,6 @@ import express from 'express';
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary"
-import Main from "./main";
-import { Provider } from "react-redux";
-import store from "./redux/store";
 import path from 'path';
 
 import { isAuthenticated } from "./middleware/auth.js";
