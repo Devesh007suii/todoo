@@ -1,6 +1,6 @@
-require('@babel/register')({
-  presets: [
-    '@babel/preset-env',
-    '@babel/preset-node'
-  ]
-});
+module.exports = function(api) {
+  api.cache(true);
+  return {
+    presets: ['babel-preset-expo'],
+  };
+};
