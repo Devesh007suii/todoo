@@ -2,10 +2,8 @@ import express from 'express';
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import cloudinary from "cloudinary"
-import path from 'path';
+import app from "./app.js";
 
-import { isAuthenticated } from "./middleware/auth.js";
-import { errorHandler } from "./middleware/error.js";
 
 config({
     path:"./config/config.env",
@@ -17,22 +15,10 @@ cloudinary.config({
     api_secret: process.env.CLOUD_API_SECRET
 })
 
-const app = express();
 
 
 
-// Enable CORS
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
 
-// Middleware to parse JSON data in request body
-app.use(express.json());
-
-// Middleware to check authentication
-app.use(isAuthenticated);
 
 // Routes
 app.get('/', (req, res) => {
@@ -41,13 +27,7 @@ app.get('/', (req, res) => {
 
 
 
-// Serve the bundled JavaScript file for the React Native app
-app.get('/bundle.js', (req, res) => {
-  res.sendFile(path.join(__dirname, 'bundle.js'));
-});
 
-// Error handler middleware
-app.use(errorHandler);
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI).then(() => {
