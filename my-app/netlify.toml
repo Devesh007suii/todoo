@@ -1,5 +1,5 @@
 [build]
-  command = "expo build:web"
+  command = "node_modules/.bin/expo build:web"
   publish = "web-build"
   functions = "lambda"
   environment = { 
@@ -7,6 +7,3 @@
     EXPO_CLI_PASSWORD = "cr7suiiiii", 
     EXPO_CLI_USERNAME = "devesh007" 
   }
-
-[build.environment]
-  CI = "false"
