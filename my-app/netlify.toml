@@ -2,11 +2,9 @@
   command = "expo build:web"
   publish = "web-build"
   functions = "lambda"
-  environment = { 
-    NODE_VERSION = "14.15.4", 
-    EXPO_CLI_PASSWORD = "cr7suiiiii", 
-    EXPO_CLI_USERNAME = "devesh007" 
-  }
-
-[build.environment]
-  CI = "false"
+  
+  [build.environment]
+    CI = "false"
+    NODE_VERSION = "14.15.4"
+    EXPO_CLI_PASSWORD = "cr7suiiiii"
+    EXPO_CLI_USERNAME = "devesh007"
