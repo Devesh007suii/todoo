@@ -6,7 +6,9 @@
     "start": "expo build:web",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prebuild": "npm install -g expo-cli",
+    "build": "expo build:web"
   },
   "dependencies": {
     "@react-navigation/native": "^6.1.6",
